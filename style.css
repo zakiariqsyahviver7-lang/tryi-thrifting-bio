@@ -1,0 +1,307 @@
+/* --- 1. PENGATURAN DASAR & VARIABEL WARNA --- */
+:root {
+    --primary-color: #9C27B0;
+    --secondary-color: #E91E63;
+    --accent-color: #FF9800;
+    --bg-dark: #12001c;
+    --text-light: #f5f5f5;
+    
+    --glass-bg: rgba(20, 0, 30, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- 2. BACKGROUND & CAHAYA UTAMA --- */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* (Properti background-image telah dipindah ke tag video) */
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Denyut cahaya (Lighting) atmosfer Halloween */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(18, 0, 28, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: -2;
+    animation: pulseGlow 10s infinite alternate ease-in-out; 
+}
+
+/* --- REVISI FITUR 1: LAYER ANIMASI KABUT & PARTIKEL --- */
+.bg-animations-container {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: -1; /* Berada di atas background asli, tapi di belakang tombol */
+    overflow: hidden;
+}
+
+/* [TAMBAHAN BARU] Pengaturan Live Video Wallpaper */
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -5; /* Didorong lebih jauh ke belakang */
+    pointer-events: none; /* Memastikan lapisan video tembus pandang terhadap klik */
+}
+
+
+/* [TAMBAHAN BARU] Lapisan Gambar Background Asli (Slow Zoom & Float) */
+.animated-bg-image {
+    position: absolute;
+    /* Dibuat 120% agar saat bergerak tidak ada area kosong/putih di pinggir layar */
+    top: -10%; left: -10%; width: 120%; height: 120%;
+    background-image: url('assets/Background.png'); 
+    background-size: cover;
+    background-position: center;
+    /* Transisi transform untuk efek Parallax yang halus */
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Animasi pergerakan gambar otomatis (Zoom & Float) */
+    animation: zoomAndFloat 35s infinite alternate ease-in-out;
+}
+
+/* Kabut (Fog) */
+.fog-layer {
+    position: absolute;
+    width: 200%; height: 100%;
+    opacity: 0.4;
+}
+
+.fog-1 {
+    background: radial-gradient(ellipse at center, rgba(156, 39, 176, 0.15) 0%, rgba(20, 0, 30, 0) 60%);
+    animation: moveFog 25s linear infinite;
+}
+
+.fog-2 {
+    width: 250%;
+    background: radial-gradient(ellipse at bottom, rgba(255, 152, 0, 0.08) 0%, rgba(20, 0, 30, 0) 50%);
+    animation: moveFog 35s linear infinite reverse;
+}
+
+/* Partikel mengambang (seperti kunang-kunang/abu sihir) */
+.particle {
+    position: absolute;
+    bottom: -50px;
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+    opacity: 0;
+}
+
+.p1 { left: 20%; width: 6px; height: 6px; background: rgba(255,152,0,0.8); box-shadow: 0 0 10px #FF9800; animation-duration: 15s; animation-delay: 0s; }
+.p2 { left: 70%; width: 8px; height: 8px; background: rgba(156,39,176,0.8); box-shadow: 0 0 15px #9C27B0; animation-duration: 22s; animation-delay: 4s; }
+.p3 { left: 40%; width: 5px; height: 5px; background: rgba(233,30,99,0.8); box-shadow: 0 0 10px #E91E63; animation-duration: 18s; animation-delay: 8s; }
+.p4 { left: 85%; width: 7px; height: 7px; background: rgba(255,152,0,0.6); box-shadow: 0 0 12px #FF9800; animation-duration: 25s; animation-delay: 12s; }
+
+/* --- 3. LAYOUT UTAMA --- */
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Menjaga agar konten selalu terkunci di tengah */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* WAJIB ADA agar z-index berfungsi */
+    z-index: 10; /* Membawa tombol ke lapisan paling depan di atas video */
+}
+
+/* --- 4. HEADER & LOGO --- */
+.profile-section {
+    text-align: center;
+    margin-bottom: 25px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.profile-logo {
+    width: 120px; height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    padding: 5px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.5);
+    margin-bottom: 15px;
+}
+
+.brand-name {
+    font-size: 1.8rem; font-weight: 700;
+    margin-bottom: 5px; letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.brand-description {
+    font-size: 1rem; color: #e0e0e0; font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- 5. SOCIAL MEDIA ICON BAR & BUTTONS WRAPPER --- */
+.links-wrapper {
+    width: 100%;
+    display: flex; flex-direction: column;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+/* REVISI FITUR 2: Social Icon Bar (Center Aligned & Brand Colors) */
+.social-icons-bar {
+    display: flex;
+    justify-content: center; /* Dipastikan rata tengah */
+    align-items: center;
+    gap: 25px; /* Jarak proporsional antarikon */
+    margin-bottom: 20px;
+}
+
+.social-icons-bar a {
+    font-size: 1.6rem;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Transisi halus tanpa mengubah ukuran */
+    opacity: 0.6; /* Meredup saat normal */
+}
+
+/* Warna & Glow Spesifik Brand (Tanpa mengubah scale/posisi) */
+/* Shopee */
+.social-icons-bar a#icon-shopee { color: #EE4D2D; }
+.social-icons-bar a#icon-shopee.active-brand-glow,
+.social-icons-bar a#icon-shopee:hover,
+.social-icons-bar a#icon-shopee:focus-visible {
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(238,77,45,0.8), 0 0 25px rgba(238,77,45,0.5);
+}
+
+/* TikTok */
+.social-icons-bar a#icon-tiktok { color: #e0e0e0; }
+.social-icons-bar a#icon-tiktok.active-brand-glow,
+.social-icons-bar a#icon-tiktok:hover,
+.social-icons-bar a#icon-tiktok:focus-visible {
+    opacity: 1; color: #ffffff;
+    text-shadow: -2px -2px 6px #00f2fe, 2px 2px 6px #fe0979, 0 0 15px rgba(255,255,255,0.6);
+}
+
+/* Instagram */
+.social-icons-bar a#icon-instagram { color: #E1306C; }
+.social-icons-bar a#icon-instagram.active-brand-glow,
+.social-icons-bar a#icon-instagram:hover,
+.social-icons-bar a#icon-instagram:focus-visible {
+    opacity: 1; color: #fff;
+    text-shadow: 0 0 10px #F56040, 0 0 20px #E1306C, 0 0 30px #833AB4;
+}
+
+/* WhatsApp */
+.social-icons-bar a#icon-whatsapp { color: #25D366; }
+.social-icons-bar a#icon-whatsapp.active-brand-glow,
+.social-icons-bar a#icon-whatsapp:hover,
+.social-icons-bar a#icon-whatsapp:focus-visible {
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(37,211,102,0.8), 0 0 25px rgba(37,211,102,0.5);
+}
+
+/* Facebook */
+.social-icons-bar a#icon-facebook { color: #1877F2; }
+.social-icons-bar a#icon-facebook.active-brand-glow,
+.social-icons-bar a#icon-facebook:hover,
+.social-icons-bar a#icon-facebook:focus-visible {
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(24,119,242,0.8), 0 0 25px rgba(24,119,242,0.5);
+}
+
+/* --- 6. CONTAINER TOMBOL (Tidak Diubah) --- */
+.links-container {
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 25px; border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    display: flex; flex-direction: column; gap: 16px;
+}
+
+/* --- 7. DESAIN TOMBOL (CSS GRID 3 KOLOM) --- */
+.link-btn {
+    display: grid;
+    grid-template-columns: 24px 1fr 24px; 
+    align-items: center; width: 100%;
+    padding: 15px 20px; border-radius: 12px;
+    text-decoration: none; color: var(--text-light);
+    background: rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease; -webkit-tap-highlight-color: transparent; 
+}
+
+.link-btn span {
+    text-align: center; font-weight: 700; font-size: 1rem;
+    letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.btn-icon-left { justify-self: start; font-size: 1.2rem; color: var(--text-light); }
+.btn-icon-right { justify-self: end; font-size: 1rem; color: rgba(255, 255, 255, 0.5); }
+
+/* INTERACTIVE GLOW EFFECT UNTUK TOMBOL */
+.link-btn.glow-active {
+    background: linear-gradient(45deg, rgba(156, 39, 176, 0.4), rgba(233, 30, 99, 0.4));
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color), 0 0 30px rgba(233, 30, 99, 0.5), inset 0 0 10px rgba(156, 39, 176, 0.2);
+    transform: translateY(-2px);
+}
+
+.link-btn.glow-active .btn-icon-right, .link-btn.glow-active .btn-icon-left {
+    color: #fff; text-shadow: 0 0 10px #fff;
+}
+
+.hidden { display: none !important; }
+
+/* --- 8. FOOTER & ANIMATED SPARKLE (Tidak Diubah) --- */
+footer { margin-top: 40px; width: 100%; animation: fadeIn 1s ease-out 0.6s backwards; }
+.footer-content { display: flex; align-items: center; justify-content: center; gap: 15px; }
+.footer-content p { font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 500; white-space: nowrap; text-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
+.footer-stars { display: flex; align-items: center; gap: 8px; }
+.footer-line { width: 30px; height: 1px; background: linear-gradient(90deg, transparent, rgba(156, 39, 176, 0.8), transparent); box-shadow: 0 0 5px var(--primary-color); }
+.star { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color), 0 0 15px var(--secondary-color); animation: twinkle var(--duration, 2s) infinite alternate ease-in-out; }
+.s1 { font-size: 0.7rem; --duration: 1.5s; animation-delay: 0.2s; }
+.s2 { font-size: 0.9rem; --duration: 2.2s; animation-delay: 0.7s; color: var(--secondary-color); }
+
+/* --- 9. KEYFRAME ANIMASI CSS --- */
+@keyframes moveFog {
+    0% { transform: translateX(0) translateY(0) scale(1); }
+    50% { transform: translateX(-5%) translateY(2%) scale(1.05); }
+    100% { transform: translateX(0) translateY(0) scale(1); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 12px var(--primary-color), 0 0 25px var(--secondary-color), 0 0 5px #fff; }
+}
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulseGlow { 0% { background: radial-gradient(circle at center, rgba(18, 0, 28, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); } 100% { background: radial-gradient(circle at center, rgba(30, 0, 45, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%); } }
+
+
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+    }
+}

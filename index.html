@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRYI THRIFTING | Link in Bio</title>
+    
+    <!-- Link FontAwesome untuk memanggil ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Pusat tautan TRYI THRIFTING - Your Destination for Thrift Jackets & Clothing">
+</head>
+<body>
+
+    <!-- REVISI FITUR 1: Layer Animasi Background (Kabut & Partikel) -->
+    <div class="bg-animations-container" aria-hidden="true">
+        <!-- [TAMBAHAN BARU] Live Video Wallpaper -->
+        <video class="background-video" autoplay muted loop playsinline preload="metadata" poster="assets/Background.png">
+            <source src="assets/tryi-live-wallpaper.mp4" type="video/mp4">
+        </video>
+        <div class="fog-layer fog-1"></div>
+        <div class="fog-layer fog-2"></div>
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+    </div>
+
+    <div class="container">
+        
+        <!-- BAGIAN A: Header / Identitas Brand -->
+        <header class="profile-section">
+            <img src="assets/Logo.jpeg" alt="Logo TRYI THRIFTING" class="profile-logo">
+            <h1 class="brand-name">TRYI THRIFTING</h1>
+            <p class="brand-description">Your Destination for Thrift Jackets & Clothing</p>
+        </header>
+
+        <main class="links-wrapper">
+            
+            <!-- REVISI FITUR 2: Social Media Icon Bar (Center Aligned) -->
+            <div class="social-icons-bar">
+                <a href="#" id="icon-shopee" target="_blank" aria-label="Shopee"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a href="#" id="icon-tiktok" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" id="icon-instagram" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" id="icon-whatsapp" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" id="icon-facebook" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+
+            <!-- BAGIAN C: Social Media Link Buttons (Tidak Diubah) -->
+            <div class="links-container" id="interactive-links-container">
+                <a href="#" id="link-shopee" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-bag-shopping btn-icon-left"></i>
+                    <span>SHOPEE</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+                <a href="#" id="link-tiktok" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-tiktok btn-icon-left"></i>
+                    <span>TIKTOK</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+                <a href="#" id="link-instagram" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram btn-icon-left"></i>
+                    <span>INSTAGRAM</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+                <a href="#" id="link-whatsapp" class="link-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp btn-icon-left"></i>
+                    <span>WHATSAPP</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+                <a href="#" id="link-facebook" class="link-btn hidden" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook btn-icon-left"></i>
+                    <span>FACEBOOK</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+            </div>
+        </main>
+
+        <!-- BAGIAN D: Footer dengan Dekorasi Twinkling Stars (Tidak Diubah) -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-stars left-stars">
+                    <i class="fa-solid fa-star star s1"></i>
+                    <i class="fa-solid fa-sparkles star s2"></i>
+                    <span class="footer-line"></span>
+                </div>
+                
+                <p>&copy; <span id="current-year"></span> TRYI THRIFTING</p>
+                
+                <div class="footer-stars right-stars">
+                    <span class="footer-line"></span>
+                    <i class="fa-solid fa-sparkles star s2"></i>
+                    <i class="fa-solid fa-star star s1"></i>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
