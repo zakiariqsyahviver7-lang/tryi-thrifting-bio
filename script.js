@@ -4,10 +4,11 @@
 
 const configLinks = {
     shopee: "https://shopee.co.id/", 
-    tiktok: "https://www.tiktok.com/", 
-    instagram: "https://www.instagram.com/", 
-    whatsappNumber: "6280000000000", 
+    tiktok: "https://www.tiktok.com/@tryi.trifth1?_r=1&_t=ZS-9BI5FnNhtvo", 
+    instagram: "https://www.instagram.com/tryi_trifthing?igsh=NGhkbHgyNHN6NHJx", 
+    whatsappNumber: "6283821804918", 
     whatsappMessage: "Halo TRYI THRIFTING, saya ingin bertanya mengenai koleksi jaket dan baju thrift.",
+    whatsappGroup: "https://chat.whatsapp.com/FKYQpwPLvb6EXV01drxo58?s=cl&p=a&iam=2",
     facebook: "" 
 };
 
@@ -37,6 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         "link-whatsapp": getWhatsAppUrl(),
         "icon-whatsapp": getWhatsAppUrl(),
+
+        "link-wagroup": configLinks.whatsappGroup,
         
         "link-facebook": configLinks.facebook,
         "icon-facebook": configLinks.facebook
